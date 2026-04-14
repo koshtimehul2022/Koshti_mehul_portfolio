@@ -12,6 +12,7 @@ const ContactSection = () => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
+    phone: '',
     message: '',
   });
   const [cooldownRemaining, setCooldownRemaining] = useState(0);
@@ -113,6 +114,7 @@ const ContactSection = () => {
         body: JSON.stringify({
           name: formState.name,
           email: formState.email,
+          phone: formState.phone,
           message: formState.message,
         }),
       });
@@ -128,7 +130,7 @@ const ContactSection = () => {
       setCooldownRemaining(COOLDOWN_DURATION);
       setFormStatus('success');
       setStatusMessage('Message sent successfully! Please wait 5 minutes before submitting again.');
-      setFormState({ name: '', email: '', message: '' });
+      setFormState({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
       console.error('Web3Forms submission error', error);
       setFormStatus('error');
@@ -267,6 +269,26 @@ const ContactSection = () => {
                   }
                   className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                   placeholder="you@example.com"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium mb-2"
+                >
+                  Mobile Number
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={formState.phone}
+                  onChange={(e) =>
+                    setFormState({ ...formState, phone: e.target.value })
+                  }
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  placeholder="+91 98765 43210"
                   required
                 />
               </div>

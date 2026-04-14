@@ -26,9 +26,9 @@ exports.handler = async function (event) {
     };
   }
 
-  const { name, email, message } = payload;
+  const { name, email, phone, message } = payload;
 
-  if (!name || !email || !message) {
+  if (!name || !email || !phone || !message) {
     return {
       statusCode: 400,
       body: JSON.stringify({ success: false, message: 'Missing required fields.' }),
@@ -45,6 +45,7 @@ exports.handler = async function (event) {
         access_key: WEB3FORMS_KEY,
         name,
         email,
+        phone,
         message,
         subject: 'New contact request from portfolio',
         source: 'React Portfolio',

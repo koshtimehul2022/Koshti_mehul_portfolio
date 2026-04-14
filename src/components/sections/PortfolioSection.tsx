@@ -3,15 +3,20 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn } from 'lucide-react';
 import { supabase } from '../../integrations/supabase/client';
 import PortfolioCard, { PortfolioItem } from '../PortfolioCard';
-import MehulImage from '../../assets/Mehul.png';
+import art1 from '../../assets/Art-01.jpg';
+import art2 from '../../assets/Art-02.jpg';
+import art3 from '../../assets/Art-03.jpg';
+import art4 from '../../assets/Art-04.jpg';
+import art5 from '../../assets/Art-05.jpg';
+import art6 from '../../assets/Art-06.jpg';
 
 const portfolioItems = [
-  { id: 1, title: 'Abstract Dreams', category: 'Digital Art', image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=600&h=800&fit=crop' },
-  { id: 2, title: 'Urban Geometry', category: 'Photography', image: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?w=600&h=600&fit=crop' },
-  { id: 3, title: 'Mehul Koshti', category: 'Personal Brand', image: MehulImage },
-  { id: 4, title: 'Neon Nights', category: 'Digital Art', image: 'https://images.unsplash.com/photo-1550684376-efcbd6e3f031?w=600&h=700&fit=crop' },
-  { id: 5, title: 'Fluid Motion', category: 'Generative', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=800&fit=crop' },
-  { id: 6, title: 'Crystal Waves', category: 'Experimental', image: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=600&h=600&fit=crop' },
+  { id: 1, title: 'Baby Ganesha Pencil Sketch', category: 'Pencil Sketch', image: art1 },
+  { id: 2, title: 'Realistic Girl Portrait Sketch', category: 'Portrait Art / Carbon Sketch', image: art2 },
+  { id: 3, title: 'Peaceful Moment Sketch', category: 'Pencil Sketch', image: art3 },
+  { id: 4, title: 'Elegant Dress Illustration', category: 'Fashion Sketch / Line Art', image: art4 },
+  { id: 5, title: 'Hulk Avengers Pencil Art', category: 'Fan Art / Character Sketch', image: art5 },
+  { id: 6, title: 'Lord Krishna Silhouette Art', category: 'Marker Sketch Art', image: art6},
 ];
 
 type DbPortfolioItem = {
