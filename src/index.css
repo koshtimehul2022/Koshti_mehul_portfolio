@@ -1,0 +1,506 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/space-grotesk/300.css';
+@import '@fontsource/space-grotesk/400.css';
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/600.css';
+@import '@fontsource/space-grotesk/700.css';
+
+/* ================================================
+   CINEMATIC PORTFOLIO DESIGN SYSTEM
+   ================================================ */
+
+@layer base {
+  :root {
+    /* Base Theme (Noir) - Black + Purple/Violet */
+    --background: 270 20% 4%;
+    --foreground: 280 20% 94%;
+    
+    --card: 270 15% 8%;
+    --card-foreground: 280 20% 94%;
+    
+    --popover: 270 15% 8%;
+    --popover-foreground: 280 20% 94%;
+    
+    --primary: 270 80% 65%;
+    --primary-foreground: 270 20% 4%;
+    
+    --secondary: 270 10% 14%;
+    --secondary-foreground: 280 20% 94%;
+    
+    --muted: 270 10% 18%;
+    --muted-foreground: 270 10% 55%;
+    
+    --accent: 280 90% 60%;
+    --accent-foreground: 270 20% 4%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 280 20% 94%;
+    
+    --border: 270 10% 20%;
+    --input: 270 10% 20%;
+    --ring: 270 80% 65%;
+    
+    --radius: 0.5rem;
+    
+    /* Custom Cinematic Tokens */
+    --hero-gradient: linear-gradient(180deg, hsl(270 20% 4%) 0%, hsl(270 15% 8%) 100%);
+    --glow-primary: 0 0 60px hsl(270 80% 65% / 0.4);
+    --glow-secondary: 0 0 120px hsl(280 90% 60% / 0.15);
+    --text-shadow-hero: 0 0 80px hsl(270 80% 65% / 0.5);
+    
+    --particle-primary: 270 80% 65%;
+    --particle-secondary: 280 90% 70%;
+    
+    --theme-transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ================================================
+     SNOW THEME - Arctic Frost
+     ================================================ */
+  [data-theme="snow"] {
+    --background: 210 30% 8%;
+    --foreground: 200 20% 95%;
+    
+    --card: 210 25% 12%;
+    --card-foreground: 200 20% 95%;
+    
+    --primary: 200 80% 70%;
+    --primary-foreground: 210 30% 8%;
+    
+    --secondary: 210 20% 18%;
+    --secondary-foreground: 200 20% 95%;
+    
+    --muted: 210 20% 20%;
+    --muted-foreground: 200 15% 60%;
+    
+    --accent: 195 100% 85%;
+    --accent-foreground: 210 30% 8%;
+    
+    --border: 210 20% 25%;
+    --ring: 200 80% 70%;
+    
+    --glow-primary: 0 0 60px hsl(200 80% 70% / 0.4);
+    --text-shadow-hero: 0 0 80px hsl(200 80% 70% / 0.6);
+    --particle-primary: 200 80% 90%;
+    --particle-secondary: 195 100% 95%;
+  }
+
+  /* ================================================
+     FIRE THEME - Inferno
+     ================================================ */
+  [data-theme="fire"] {
+    --background: 0 30% 5%;
+    --foreground: 30 100% 95%;
+    
+    --card: 0 40% 10%;
+    --card-foreground: 30 100% 95%;
+    
+    --primary: 25 100% 55%;
+    --primary-foreground: 0 30% 5%;
+    
+    --secondary: 0 30% 15%;
+    --secondary-foreground: 30 100% 95%;
+    
+    --muted: 0 25% 18%;
+    --muted-foreground: 20 40% 55%;
+    
+    --accent: 15 100% 60%;
+    --accent-foreground: 0 30% 5%;
+    
+    --border: 0 30% 25%;
+    --ring: 25 100% 55%;
+    
+    --glow-primary: 0 0 80px hsl(25 100% 55% / 0.5);
+    --text-shadow-hero: 0 0 100px hsl(25 100% 50% / 0.7);
+    --particle-primary: 25 100% 60%;
+    --particle-secondary: 15 100% 70%;
+  }
+
+  /* ================================================
+     RAIN THEME - Storm
+     ================================================ */
+  [data-theme="rain"] {
+    --background: 215 30% 6%;
+    --foreground: 200 20% 90%;
+    
+    --card: 215 25% 10%;
+    --card-foreground: 200 20% 90%;
+    
+    --primary: 195 80% 55%;
+    --primary-foreground: 215 30% 6%;
+    
+    --secondary: 215 20% 15%;
+    --secondary-foreground: 200 20% 90%;
+    
+    --muted: 215 20% 18%;
+    --muted-foreground: 200 15% 50%;
+    
+    --accent: 185 70% 50%;
+    --accent-foreground: 215 30% 6%;
+    
+    --border: 215 20% 22%;
+    --ring: 195 80% 55%;
+    
+    --glow-primary: 0 0 60px hsl(195 80% 55% / 0.35);
+    --text-shadow-hero: 0 0 80px hsl(195 80% 55% / 0.5);
+    --particle-primary: 195 80% 70%;
+    --particle-secondary: 200 60% 80%;
+  }
+
+  /* ================================================
+     DESERT THEME - Sahara
+     ================================================ */
+  [data-theme="desert"] {
+    --background: 30 30% 8%;
+    --foreground: 40 40% 92%;
+    
+    --card: 30 25% 12%;
+    --card-foreground: 40 40% 92%;
+    
+    --primary: 35 85% 55%;
+    --primary-foreground: 30 30% 8%;
+    
+    --secondary: 30 20% 18%;
+    --secondary-foreground: 40 40% 92%;
+    
+    --muted: 30 20% 20%;
+    --muted-foreground: 35 30% 50%;
+    
+    --accent: 25 75% 50%;
+    --accent-foreground: 30 30% 8%;
+    
+    --border: 30 20% 25%;
+    --ring: 35 85% 55%;
+    
+    --glow-primary: 0 0 60px hsl(35 85% 55% / 0.35);
+    --text-shadow-hero: 0 0 80px hsl(35 85% 55% / 0.5);
+    --particle-primary: 40 70% 70%;
+    --particle-secondary: 35 60% 60%;
+  }
+
+  /* ================================================
+     ELECTRO THEME - Short Circuit
+     ================================================ */
+  [data-theme="electro"] {
+    --background: 240 30% 5%;
+    --foreground: 180 100% 95%;
+    
+    --card: 240 25% 10%;
+    --card-foreground: 180 100% 95%;
+    
+    --primary: 180 100% 50%;
+    --primary-foreground: 240 30% 5%;
+    
+    --secondary: 240 20% 15%;
+    --secondary-foreground: 180 100% 95%;
+    
+    --muted: 240 20% 18%;
+    --muted-foreground: 180 40% 50%;
+    
+    --accent: 280 100% 60%;
+    --accent-foreground: 240 30% 5%;
+    
+    --border: 240 20% 25%;
+    --ring: 180 100% 50%;
+    
+    --glow-primary: 0 0 80px hsl(180 100% 50% / 0.5);
+    --text-shadow-hero: 0 0 100px hsl(180 100% 50% / 0.7);
+    --particle-primary: 180 100% 70%;
+    --particle-secondary: 280 100% 70%;
+  }
+
+  /* ================================================
+     OCEAN THEME - Marine Life
+     ================================================ */
+  [data-theme="ocean"] {
+    --background: 200 50% 6%;
+    --foreground: 185 40% 92%;
+    
+    --card: 200 40% 10%;
+    --card-foreground: 185 40% 92%;
+    
+    --primary: 175 70% 45%;
+    --primary-foreground: 200 50% 6%;
+    
+    --secondary: 200 30% 15%;
+    --secondary-foreground: 185 40% 92%;
+    
+    --muted: 200 25% 18%;
+    --muted-foreground: 185 30% 50%;
+    
+    --accent: 160 60% 40%;
+    --accent-foreground: 200 50% 6%;
+    
+    --border: 200 25% 22%;
+    --ring: 175 70% 45%;
+    
+    --glow-primary: 0 0 60px hsl(175 70% 45% / 0.4);
+    --text-shadow-hero: 0 0 80px hsl(175 70% 45% / 0.6);
+    --particle-primary: 175 60% 70%;
+    --particle-secondary: 190 50% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary) / 0.3) transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    cursor: none;
+    overflow-x: hidden;
+    transition: 
+      background-color var(--theme-transition),
+      color var(--theme-transition);
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.3);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+}
+
+@layer components {
+  /* Hero Typography */
+  .text-hero {
+    @apply text-[clamp(3rem,15vw,12rem)] font-bold leading-[0.85] tracking-[-0.04em];
+    text-shadow: var(--text-shadow-hero);
+    transition: text-shadow var(--theme-transition);
+  }
+
+  .text-hero-sub {
+    @apply text-[clamp(1rem,3vw,2rem)] font-light tracking-[0.2em] uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .text-display {
+    @apply text-[clamp(2rem,8vw,6rem)] font-semibold leading-[1.1] tracking-[-0.03em];
+  }
+
+  .text-body-lg {
+    @apply text-[clamp(1rem,2vw,1.5rem)] font-light leading-relaxed;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Glow Effects */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+    transition: box-shadow var(--theme-transition);
+  }
+
+  .glow-text {
+    text-shadow: var(--text-shadow-hero);
+    transition: text-shadow var(--theme-transition);
+  }
+
+  /* Section Layouts */
+  .section-horizontal {
+    @apply flex flex-nowrap overflow-x-auto snap-x snap-mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .section-horizontal::-webkit-scrollbar {
+    display: none;
+  }
+
+  .section-panel {
+    @apply min-w-full h-screen flex items-center justify-center snap-center;
+  }
+
+  /* Horizontal Scroll Container - GSAP driven, single row */
+  .horizontal-scroll-container {
+    @apply flex flex-nowrap gap-4 sm:gap-6;
+    will-change: transform;
+  }
+
+  .horizontal-scroll-container > * {
+    flex-shrink: 0;
+  }
+
+  /* Native horizontal scroll (no GSAP pin) */
+  .native-horizontal-scroll {
+    @apply flex flex-nowrap gap-4 sm:gap-6;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .native-horizontal-scroll::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .native-horizontal-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .native-horizontal-scroll::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.3);
+    border-radius: 2px;
+  }
+
+  .native-horizontal-scroll > * {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+
+  /* Hide scrollbar utility */
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Glass Effect */
+  .glass {
+    @apply backdrop-blur-xl;
+    background: hsl(var(--background) / 0.7);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  /* Magnetic Button */
+  .magnetic-target {
+    @apply relative inline-block;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Grain Overlay */
+  .grain::before {
+    content: '';
+    @apply fixed inset-0 pointer-events-none z-[9999];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+  }
+
+  /* Animated Underline */
+  .animated-underline {
+    @apply relative;
+  }
+
+  .animated-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-[1px];
+    background: hsl(var(--primary));
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animated-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Reveal Animation Classes */
+  .reveal-up {
+    @apply opacity-0 translate-y-12;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .reveal-up.revealed {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Timeline Styles */
+  .timeline-line {
+    @apply absolute left-0 top-0 w-px h-full;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      hsl(var(--primary) / 0.5) 10%,
+      hsl(var(--primary) / 0.5) 90%,
+      transparent 100%
+    );
+  }
+
+  .timeline-dot {
+    @apply absolute left-0 w-3 h-3 rounded-full -translate-x-1/2;
+    background: hsl(var(--primary));
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+}
+
+@layer utilities {
+  /* Stagger Animation Delays */
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+  .stagger-4 { transition-delay: 0.4s; }
+  .stagger-5 { transition-delay: 0.5s; }
+
+  /* Perspective */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* Text Gradient */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--foreground)) 100%
+    );
+  }
+}
+
+/* Particle Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes snow-fall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0.3; }
+}
+
+@keyframes rain-fall {
+  0% { transform: translateY(-100vh); opacity: 0.8; }
+  100% { transform: translateY(100vh); opacity: 0.2; }
+}
+
+@keyframes ember-rise {
+  0% { transform: translateY(100vh) scale(1); opacity: 1; }
+  100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+}
+
+@keyframes sand-blow {
+  0% { transform: translateX(-100vw) translateY(0); opacity: 0.6; }
+  100% { transform: translateX(100vw) translateY(-50px); opacity: 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
