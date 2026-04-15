@@ -33,46 +33,14 @@ const ThemeSwitcher = () => {
     setTheme(t);
     setIsOpen(false);
 
-    // Scroll to top immediately
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // Kill all triggers, reset transforms, re-init
     setTimeout(() => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-
-      const horizontalSections = document.querySelectorAll('.horizontal-scroll-container');
-      horizontalSections.forEach((container) => {
-        const el = container as HTMLElement;
-        gsap.set(el, { x: 0 });
-        const scrollWidth = el.scrollWidth;
-        const containerWidth = el.offsetWidth;
-        const scrollDistance = scrollWidth - containerWidth;
-        if (scrollDistance <= 0) return;
-        const section = el.closest('section');
-        if (!section) return;
-        gsap.to(el, {
-          x: -scrollDistance,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'center center',
-            end: () => `+=${scrollDistance}`,
-            scrub: 1,
-            pin: true,
-            pinType: 'transform',
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-      });
-
       ScrollTrigger.refresh();
-    }, 600);
+    }, 100);
   };
 
   return (
     <motion.div
-      className="fixed top-6 left-6 z-[100]"
+      className="fixed top-4 left-4 z-50"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 2 }}
@@ -80,7 +48,7 @@ const ThemeSwitcher = () => {
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         data-cursor-hover
-        className="p-3 rounded-full glass hover:bg-secondary transition-colors"
+        className="p-2.5 sm:p-3 rounded-full glass hover:bg-secondary transition-colors"
         aria-label="Change theme"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}

@@ -24,6 +24,7 @@ const cleanupInteraction = () => {
     window.removeEventListener('pointerdown', interactionHandler);
     window.removeEventListener('keydown', interactionHandler);
     window.removeEventListener('touchstart', interactionHandler);
+    window.removeEventListener('wheel', interactionHandler);
     interactionHandler = null;
   }
 };
@@ -39,6 +40,7 @@ const prepareUnlock = (callback: () => void) => {
   window.addEventListener('pointerdown', interactionHandler, { once: true });
   window.addEventListener('keydown', interactionHandler, { once: true });
   window.addEventListener('touchstart', interactionHandler, { once: true });
+  window.addEventListener('wheel', interactionHandler, { once: true });
 };
 
 export const playSound = async (src: string, loop = false, volume = 0.18) => {

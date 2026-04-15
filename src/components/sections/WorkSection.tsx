@@ -21,6 +21,7 @@ const funProjects = [
   { id: 'spinner', title: 'Custom Spinner', description: 'Add options and let fate decide!', icon: '🎡', color: 'from-purple-500/20 to-pink-500/20' },
 ];
 
+
 interface LiveProject {
   id: string;
   title: string;
@@ -46,7 +47,7 @@ const WorkSection = ({ activeProject, setActiveProject }: WorkSectionProps) => {
     });
   }, []);
 
-  // Hide navigation when a game is active
+
   useEffect(() => {
     const nav = document.querySelector('nav.fixed');
     if (activeProject) {
@@ -179,22 +180,22 @@ const WorkSection = ({ activeProject, setActiveProject }: WorkSectionProps) => {
                   transition={{ duration: 0.8, delay: 0.5 + idx * 0.1 }}
                   whileHover={{ y: -8, scale: 1.02 }}
                   onClick={(e) => handleLiveProjectClick(e, project.project_url)}
-                  className="group relative cursor-pointer"
+                  className="group relative cursor-pointer overflow-hidden rounded-2xl"
                   data-cursor-hover
                   data-cursor-text="Visit"
                 >
-                  <div className="h-[280px] bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl overflow-hidden relative">
+                  <div className="relative w-full min-h-[180px] aspect-[16/9] sm:aspect-video bg-gradient-to-br from-primary/10 to-accent/10 overflow-hidden rounded-2xl">
                     {project.poster_url && (
                       <div className="absolute inset-0">
                         <img
                           src={project.poster_url}
                           alt={project.title}
-                          className="w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-700"
+                          className="w-full h-full object-contain sm:object-cover opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-700"
                         />
                       </div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                    <div className="relative h-full p-5 flex flex-col justify-between">
+                    <div className="relative w-full h-full p-4 sm:p-5 flex flex-col justify-between">
                       <div className="flex items-start justify-between">
                         <span className="text-[10px] uppercase tracking-wider text-primary/70 font-medium">Live Project</span>
                         <motion.div className="w-8 h-8 rounded-full border border-foreground/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300">

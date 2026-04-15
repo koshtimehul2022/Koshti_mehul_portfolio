@@ -113,6 +113,9 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8081,
+    headers: {
+      "Cache-Control": "no-store",
+    },
   },
   plugins: [react(), mode === "development" && componentTagger(), mode === "development" && netlifyFunctionsDevPlugin()].filter(Boolean),
   resolve: {
