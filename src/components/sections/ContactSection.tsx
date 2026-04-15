@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { Send, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
 import { useSettings } from '@/contexts/SettingsContext';
 
-const COOLDOWN_KEY = 'web3forms_last_submit_time';
+const COOLDOWN_KEY = 'contact_last_submit_time';
 const COOLDOWN_DURATION = 5 * 60 * 1000;
 
 const ContactSection = () => {
@@ -14,6 +14,7 @@ const ContactSection = () => {
     email: '',
     phone: '',
     message: '',
+    botField: '',
   });
   const [cooldownRemaining, setCooldownRemaining] = useState(0);
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -105,24 +106,53 @@ const ContactSection = () => {
     setFormStatus('sending');
     setStatusMessage('');
 
+    const isNonEmptyString = (value: string) => value.trim().length > 0;
+    const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    const errors: string[] = [];
+
+    if (!isNonEmptyString(formState.name)) errors.push('Name is required.');
+    if (!isNonEmptyString(formState.email) || !isValidEmail(formState.email)) errors.push('A valid email is required.');
+    if (!isNonEmptyString(formState.phone)) errors.push('Phone is required.');
+    if (!isNonEmptyString(formState.message)) errors.push('Message is required.');
+
+    if (errors.length > 0) {
+      setFormStatus('error');
+      setStatusMessage(errors.join(' '));
+      return;
+    }
+
     try {
-      const response = await fetch('/.netlify/functions/contact-submit', {
+      const response = await fetch('/.netlify/functions/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: formState.name,
-          email: formState.email,
-          phone: formState.phone,
-          message: formState.message,
+          name: formState.name.trim(),
+          email: formState.email.trim(),
+          phone: formState.phone.trim(),
+          message: formState.message.trim(),
+          botField: formState.botField,
         }),
       });
 
-      const result = await response.json();
+      const responseBody = await response.text();
+      let result: { success?: boolean; message?: string; errors?: string[] } | null = null;
 
-      if (!response.ok || result.success !== true) {
-        throw new Error(result.message || 'Submission failed.');
+      if (responseBody) {
+        try {
+          result = JSON.parse(responseBody);
+        } catch (parseError) {
+          throw new Error('Invalid response from server.');
+        }
+      }
+
+      if (!response.ok) {
+        throw new Error(result?.message || 'Server error while submitting the form.');
+      }
+
+      if (!result || result.success !== true) {
+        throw new Error(result?.message || 'Submission failed.');
       }
 
       const now = Date.now();
@@ -130,9 +160,9 @@ const ContactSection = () => {
       setCooldownRemaining(COOLDOWN_DURATION);
       setFormStatus('success');
       setStatusMessage('Message sent successfully! Please wait 5 minutes before submitting again.');
-      setFormState({ name: '', email: '', phone: '', message: '' });
+      setFormState({ name: '', email: '', phone: '', message: '', botField: '' });
     } catch (error) {
-      console.error('Web3Forms submission error', error);
+      console.error('Contact submission error', error);
       setFormStatus('error');
       setStatusMessage(
         error instanceof Error
@@ -312,6 +342,19 @@ const ContactSection = () => {
                   required
                 />
               </div>
+
+              <input
+                type="text"
+                name="botField"
+                value={formState.botField}
+                onChange={(e) =>
+                  setFormState({ ...formState, botField: e.target.value })
+                }
+                autoComplete="off"
+                tabIndex={-1}
+                className="absolute left-[-9999px] opacity-0 pointer-events-none"
+                aria-hidden="true"
+              />
 
               <button
                 type="submit"

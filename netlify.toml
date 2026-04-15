@@ -3,6 +3,10 @@
   publish = "dist"
   functions = "netlify/functions"
 
+[dev]
+  command = "npx vite --host :: --port 8081"
+  targetPort = 8081
+
 # Redirect all routes to index.html for React Router SPA support.
 [[redirects]]
   from = "/*"
